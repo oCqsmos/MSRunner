@@ -1,28 +1,28 @@
-# from tkinter import *
-# from tkinter import messagebox
-# def gridadd(kind,gridx,gridy):
-#     if kind=="bomb":
-#         grid[gridy].append(Button(root,text=))
+from tkinter import *
+from tkinter import messagebox
+def gridadd(kind,gridx,gridy):
+    if kind=="bomb":
+        grid[gridy].append(Button(root,text="O",fg="red"))
 
-# root = Tk()
-# root.title('MineSweeper')
-# roo2=Tk()
-# roo2.title('GameText')
+root = Tk()
+root.title('MineSweeper')
+roo2=Tk()
+roo2.title('GameText')
 
-# global grid
-# grid=[[0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0],
-#       [0,0,0,0,0,0,0,0,0,0]]
-# textupdates=[]
+global grid
+grid=[[0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0]]
+textupdates=[]
 
 
-# root.mainloop()
+root.mainloop()
 
-print("hello world")
+# print("hello world")
