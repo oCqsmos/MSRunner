@@ -5,21 +5,39 @@ import random
 def bombClick():
     display=messagebox.showerror("Minesweeper","gameover")
     root.destroy()
-    roo2.destroy()
-def numClick(num):
+    # roo2.destroy()
+def numClick(num,pos):
     print("it worked")
     print(num)
+    if num==0:
+        # tiles[pos[1]][pos[0]]
+        tiles[pos[1]][pos[0]].config(command=spake,text=str(num))
+        if pos[1]!=len(sweeper):
+            tiles[pos[1]+1][pos[0]].invoke()
+        if pos[1]!=0:
+            tiles[pos[1]-1][pos[0]].invoke()
+        if pos[0]!=len(sweeper):
+            tiles[pos[1]][pos[0]+1].invoke()
+        if pos[1]!=0:
+            tiles[pos[1]][pos[0]-1].invoke()
+        if pos[1]!=len(sweeper) and pos[0]!=len(sweeper):
+            pass
+    else:
+        tiles[pos[1]][pos[0]].config(command=spake,text=str(num))
+def spake():
+    pass
+        
 
 def gridAdd(kind,gridx,gridy):
     if kind=="bomb":
         # grid[gridy].append(Button(root,text="♦",fg="red"))
         tiles[gridy][gridx]=Button(root,text="♦",fg="red",command=bombClick)
-        tiles[gridy][gridx].grid(row=gridx,column=gridy,sticky="NSEW")
+        tiles[gridy][gridx].grid(column=gridx,row=gridy,sticky="NSEW")
     for i in range(0,9):
         if kind==i:
             # grid[gridy].append(Button(root,text=str(i),fg="blue"))
-            tiles[gridy][gridx]=Button(root,text=str(i),fg="blue",command=lambda x=i: numClick(x) )
-            tiles[gridy][gridx].grid(row=gridx,column=gridy,sticky="NSEW")
+            tiles[gridy][gridx]=Button(root,text='',fg="blue",command=lambda x=i: numClick(x,(gridx,gridy))) 
+            tiles[gridy][gridx].grid(column=gridx,row=gridy,sticky="NSEW")
 
 
 def randomizer(bCount):
@@ -50,18 +68,18 @@ def randomizer(bCount):
             correct=True
 
     print(bPos)
-randomizer(10)
+randomizer(2)
 
 root = Tk()
 root.title('MineSweeper')
 for i in range(0,10):
     Grid.rowconfigure(root,i,weight=1)
     Grid.columnconfigure(root,i,weight=1)
-roo2=Tk()
-roo2.title('GameText')
+# roo2=Tk()
+# roo2.title('GameText')
 
 global grid
-grid=[[0,0,0,0,0,0,0,0,0,0],
+sweeper=[[0,0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0,0],
@@ -85,70 +103,70 @@ tiles=[[0,0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0,0]]
 textupdates=[]
 for i in bPos:
-    grid[i[0]][i[1]]="hi"
-print(grid)
+    sweeper[i[0]][i[1]]="hi"
+print(sweeper)
 top=True
 bot=True
 rig=True
 lef=True
-for i in range(0,len(grid)):
-    for r in range(0,len(grid[i])):
-        if grid[i][r]=="hi":
+for i in range(0,len(sweeper)):
+    for r in range(0,len(sweeper[i])):
+        if sweeper[i][r]=="hi":
             pass
         else:
             temp=0
             print(i,r)
             if i!=0:
                 top=False
-            if i!=len(grid)-1:
+            if i!=len(sweeper)-1:
                 bot=False
             if r!=0:
                 lef=False
-            if r!=len(grid[i])-1:
+            if r!=len(sweeper[i])-1:
                 rig=False
 
 
             if not top and not rig:
-                if grid[i-1][r+1]=="hi":
+                if sweeper[i-1][r+1]=="hi":
                     temp+=1
             if not top:
-                if grid[i-1][r]=="hi":
+                if sweeper[i-1][r]=="hi":
                     temp+=1
             if not top and not lef:
-                if grid[i-1][r-1]=="hi":
+                if sweeper[i-1][r-1]=="hi":
                     temp+=1
             if not lef:
-                if grid[i][r-1]=="hi":
+                if sweeper[i][r-1]=="hi":
                     temp+=1
             if not lef and not bot:
-                if grid[i+1][r-1]=="hi":
+                if sweeper[i+1][r-1]=="hi":
                     temp+=1
             if not bot:
-                if grid[i+1][r]=="hi":
+                if sweeper[i+1][r]=="hi":
                     temp+=1
             if not bot and not rig:
-                if grid[i+1][r+1]=="hi":
+                if sweeper[i+1][r+1]=="hi":
                     temp+=1
             if not rig:
-                if grid[i][r+1]=="hi":
+                if sweeper[i][r+1]=="hi":
                     temp+=1
-            grid[i][r]=temp
+            sweeper[i][r]=temp
         
         top=True
         bot=True
         rig=True
         lef=True
 
-print(grid)
+print(sweeper)
 
 
-for i in range(0,len(grid)):
-    for r in range(0,len(grid[i])):
-        if grid[i][r]=="hi":
+for i in range(0,len(sweeper)):
+    for r in range(0,len(sweeper[i])):
+        if sweeper[i][r]=="hi":
             gridAdd("bomb",r,i)
         else:
             for q in range(0,8):
-                if grid[i][r]==q:
+                if sweeper[i][r]==q:
                     gridAdd(q,r,i)
 
 #testing code
